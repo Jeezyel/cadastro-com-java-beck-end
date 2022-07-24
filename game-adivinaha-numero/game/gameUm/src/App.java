@@ -15,9 +15,9 @@ public class App {
     public static void armazenarChutes(Integer Integer){
 
     }
-    public static void escolaNumero(){
+    public static Integer escolaNumero(){
+        Integer escolaNumero = null;
 
-
-        
+        return escolaNumero ;
     }
 }
