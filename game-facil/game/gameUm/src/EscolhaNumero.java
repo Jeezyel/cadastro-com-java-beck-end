@@ -4,32 +4,44 @@ import java.util.Random;
 import java.util.Scanner;
 
 
-public class App {
+public class EscolhaNumero {
     public static Scanner leia = new Scanner(System.in);
     public static List<Integer> chutes = new ArrayList<Integer>();
     public static void main(String[] args) throws Exception {
         System.out.println("jogos de descobri o chute! \n escola um dificuldade: \n 1-Fácil \n 2-Médio \n 3-Difícil");
         Integer escolhaDificuldade = 1 ;
         try {
-            escolhaDificuldade = App.leia.nextInt();
+            escolhaDificuldade = EscolhaNumero.leia.nextInt();
         } catch (Exception e) {
             System.out.println("erro tente novamente apenas valores inteiros");
-            escolhaDificuldade = App.leia.nextInt();
+            escolhaDificuldade = EscolhaNumero.leia.nextInt();
         }
-        App.menu(escolhaDificuldade);
+        EscolhaNumero.menu(escolhaDificuldade);
     }
     public static void menu(Integer dificuldade){
         Integer numeroEscolhido , numeroTentativas ;
         switch (dificuldade) {
+            
             case 1:
-                numeroEscolhido = App.escolaNumeroFacil();
+                numeroEscolhido = EscolhaNumero.escolaNumeroFacil();
+                numeroTentativas = 9 ;
+
+                EscolhaNumero.adivinharNumero(numeroTentativas , numeroEscolhido);
+                break;
+
+            case 2:
+                numeroEscolhido = EscolhaNumero.escolaNumeroMedio();
                 numeroTentativas = 7 ;
 
-               App.adivinharNumero(numeroTentativas , numeroEscolhido);
+                EscolhaNumero.adivinharNumero(numeroTentativas , numeroEscolhido);
                 break;
-        
-            default:
+            case 3:
+                numeroEscolhido = EscolhaNumero.escolaNumeroDificil();
+                numeroTentativas = 5 ;
+
+                EscolhaNumero.adivinharNumero(numeroTentativas , numeroEscolhido);
                 break;
+                
         }
 
     }
@@ -38,20 +50,20 @@ public class App {
             System.out.println("chute um numero");
             int chute = 1 ;
             try {
-                chute = App.leia.nextInt();
+                chute = EscolhaNumero.leia.nextInt();
             } catch (Exception e) {
                 System.out.println("valor invalido tente novamente apenas valores inteiros");
-                chute = App.leia.nextInt();
+                chute = EscolhaNumero.leia.nextInt();
             }
             
-            App.armazenarChutes(chute);
+            EscolhaNumero.armazenarChutes(chute);
 
             if (chute == numeroEscolhido) {
                 i = numeroTentativas ;
-                App.fimDeJogo();
+                EscolhaNumero.fimDeJogo();
             }
             else if(i == numeroTentativas){
-                App.fimDeJogo();
+                EscolhaNumero.fimDeJogo();
             }
             else{
                 System.out.println("numero errado tente novamente : "  + numeroTentativas + " / " + i );
@@ -61,13 +73,13 @@ public class App {
        
     }
     public static void armazenarChutes(Integer chutee){
-        App.chutes.add(chutee);
+        EscolhaNumero.chutes.add(chutee);
 
     }
     public static void fimDeJogo(){
         System.out.println("números chutados");
-        for (int i = 0; i < App.chutes.size(); i++) {
-            App.chutes.get(i);
+        for (int i = 0; i < EscolhaNumero.chutes.size(); i++) {
+            EscolhaNumero.chutes.get(i);
         }
         System.out.println("números escolhido :" + 1);// alterar esta linha para o numero escolhido
     }
