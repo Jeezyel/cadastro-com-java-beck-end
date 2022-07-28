@@ -8,7 +8,11 @@ public class EscolhaNumero {
     public static Scanner leia = new Scanner(System.in);
     public static List<Integer> chutes = new ArrayList<Integer>();
     public static void main(String[] args) throws Exception {
-        System.out.println("jogos de descobri o chute! \n escola um dificuldade: \n 1-Fácil \n 2-Médio \n 3-Difícil");
+        EscolhaNumero.escolhaDificuldade();
+
+    }  
+    public static void escolhaDificuldade(){
+        System.out.println("jogos de descobri o numero! \n escola um dificuldade: \n 1-Fácil \n 2-Médio \n 3-Difícil");
         Integer escolhaDificuldade = 1 ;
         try {
             escolhaDificuldade = EscolhaNumero.leia.nextInt();
@@ -17,6 +21,7 @@ public class EscolhaNumero {
             escolhaDificuldade = EscolhaNumero.leia.nextInt();
         }
         EscolhaNumero.menu(escolhaDificuldade);
+
     }
     public static void menu(Integer dificuldade){
         Integer numeroEscolhido , numeroTentativas ;
@@ -41,10 +46,18 @@ public class EscolhaNumero {
 
                 EscolhaNumero.adivinharNumero(numeroTentativas , numeroEscolhido);
                 break;
+            default:
+                System.out.println("valor invalido tente novamente");
+                EscolhaNumero.escolhaDificuldade();
+                break;
                 
         }
 
+
+
     }
+
+ 
     public static void adivinharNumero(Integer numeroTentativas , Integer numeroEscolhido){
         for (int i = 0; i < numeroTentativas; i++) {
             System.out.println("chute um numero");
@@ -58,16 +71,27 @@ public class EscolhaNumero {
             
             EscolhaNumero.armazenarChutes(chute);
 
+            if (chute < numeroEscolhido) {
+                System.out.println(" numero maior ");
+            }
+            else if(chute > numeroEscolhido){
+                System.out.println(" numero menor ");
+
+            }
+            
             if (chute == numeroEscolhido) {
                 i = numeroTentativas ;
-                EscolhaNumero.fimDeJogo();
+                EscolhaNumero.fimDeJogo(numeroTentativas , numeroEscolhido);
             }
-            else if(i == numeroTentativas){
-                EscolhaNumero.fimDeJogo();
-            }
+            
             else{
-                System.out.println("numero errado tente novamente : "  + numeroTentativas + " / " + i );
+                System.out.println("numero errado tente novamente : "  + numeroTentativas + " / " + (i + 1));
             }
+
+            if(i ==(numeroTentativas - 1) ){
+                EscolhaNumero.fimDeJogo(numeroTentativas , numeroEscolhido);
+            }
+
         }
         
        
@@ -76,12 +100,12 @@ public class EscolhaNumero {
         EscolhaNumero.chutes.add(chutee);
 
     }
-    public static void fimDeJogo(){
+    public static void fimDeJogo(Integer numeroTentativas , Integer numeroEscolhido){
         System.out.println("números chutados");
         for (int i = 0; i < EscolhaNumero.chutes.size(); i++) {
-            EscolhaNumero.chutes.get(i);
+            System.out.println( EscolhaNumero.chutes.get(i));
         }
-        System.out.println("números escolhido :" + 1);// alterar esta linha para o numero escolhido
+        System.out.println("números escolhido :" + numeroEscolhido + " numeros de tentativas : " + numeroTentativas );
     }
     public static Integer escolaNumeroFacil(){
         Random numeroAleatorio = new Random();
